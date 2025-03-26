@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leilão da JEM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .auction-item {
+      background-color: #fff;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .item-image {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+    .item-details {
+      margin-top: 15px;
+    }
+    .bid-info {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    .bidder-name {
+      font-weight: bold;
+      color: #333;
+    }
+    .bid-input {
+      padding: 8px;
+      margin-right: 10px;
+      font-size: 1em;
+    }
+    .submit-bid {
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .submit-bid:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auction-item">
+    <img src="/Produtos/images.jpg" alt="Imagem do Item" class="item-image">
+    <div class="item-details">
+      <h2>Item 1: Produto Exemplo</h2>
+      <p>Descrição do produto que está sendo leiloado. Pode ser qualquer tipo de item que você deseja vender.</p>
+    </div>
+
+    <div class="bid-info">
+      <p>Maior Lance: <span id="highest-bid">R$ 100,00</span></p>
+      <p>Vencedor: <span id="highest-bidder">João Silva</span></p>
+    </div>
+
+    <div class="bidder">
+      <input type="text" id="bid-amount" class="bid-input" placeholder="Seu lance (R$)">
+      <input type="text" id="bidder-name" class="bid-input" placeholder="Seu nome">
+      <button class="submit-bid" onclick="submitBid()">Dar Lance</button>
+    </div>
+  </div>
+
+  <script>
+    let highestBid = 100;
+    let highestBidder = "João Silva";
+
+    function submitBid() {
+      const bidAmount = parseFloat(document.getElementById("bid-amount").value);
+      const bidderName = document.getElementById("bidder-name").value;
+
+      if (!bidAmount || !bidderName) {
+        alert("Por favor, preencha todos os campos!");
+        return;
+      }
+
+      if (bidAmount > highestBid) {
+        highestBid = bidAmount;
+        highestBidder = bidderName;
+
+        document.getElementById("highest-bid").textContent = `R$ ${highestBid.toFixed(2)}`;
+        document.getElementById("highest-bidder").textContent = highestBidder;
+        alert(`Lance registrado! Novo maior lance: R$ ${highestBid}`);
+      } else {
+        alert("Seu lance deve ser maior que o maior lance atual!");
+      }
+    }
+  </script>
+
+</body>
+</html>
